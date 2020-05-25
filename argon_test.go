@@ -47,13 +47,13 @@ func TestGenerateFromPassword(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if string(hash) != "$argon2id$v=19$m65536,t=1,p=1$U0FMVA$kRmKhQ" {
+	if string(hash) != "$argon2id$v=19$m=65536,t=1,p=1$U0FMVA$kRmKhQ" {
 		t.Errorf("hash %s did not match", string(hash))
 	}
 }
 
 func TestGetParametersFromHash(t *testing.T) {
-	hash := "$argon2id$v=19$m65536,t=1,p=1$U0FMVA$kRmKhQ"
+	hash := "$argon2id$v=19$m=65536,t=1,p=1$U0FMVA$kRmKhQ"
 	params, err := argon2id.GetParametersFromHash([]byte(hash))
 	if err != nil {
 		t.Fatalf(err.Error())
@@ -89,7 +89,7 @@ func TestCompareHashAndPassword(t *testing.T) {
 	}{
 		{
 			name:     "ValidHash",
-			hash:     "$argon2id$v=19$m65536,t=1,p=1$U0FMVA$kRmKhQ",
+			hash:     "$argon2id$v=19$m=65536,t=1,p=1$U0FMVA$kRmKhQ",
 			password: "argon",
 			expected: nil,
 		},
@@ -101,13 +101,13 @@ func TestCompareHashAndPassword(t *testing.T) {
 		},
 		{
 			name:     "InvalidVersion",
-			hash:     "$argon2i$v=19$m65536,t=1,p=1$U0FMVA$kRmKhQ",
+			hash:     "$argon2i$v=19$m=65536,t=1,p=1$U0FMVA$kRmKhQ",
 			password: "",
 			expected: argon2id.ErrorInvalidVersion,
 		},
 		{
 			name:     "PasswordMismatch",
-			hash:     "$argon2id$v=19$m65536,t=1,p=1$U0FMVA$kRmKhQ",
+			hash:     "$argon2id$v=19$m=65536,t=1,p=1$U0FMVA$kRmKhQ",
 			password: "Argon",
 			expected: argon2id.ErrorPasswordMismatch,
 		},

@@ -68,7 +68,7 @@ func GenerateFromPassword(password []byte, p Parameters) ([]byte, error) {
 	eHash := base64.RawStdEncoding.EncodeToString(hash)
 
 	out := fmt.Sprintf(
-		"$argon2id$v=%d$m%d,t=%d,p=%d$%s$%s",
+		"$argon2id$v=%d$m=%d,t=%d,p=%d$%s$%s",
 		argon2.Version,
 		p.Memory, p.Time, p.Threads,
 		eSalt, eHash)
@@ -83,7 +83,7 @@ func GetParametersFromHash(hash []byte) (Parameters, error) {
 	p := Parameters{}
 	_, err := fmt.Sscanf(
 		sections[3],
-		"m%d,t=%d,p=%d",
+		"m=%d,t=%d,p=%d",
 		&p.Memory, &p.Time, &p.Threads)
 
 	if err != nil {
