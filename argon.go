@@ -13,15 +13,15 @@ import (
 var (
 	// ErrorInvalidHash indicates that the provided hash does not conform to
 	// any argon2 standard.
-	ErrorInvalidHash = fmt.Errorf("invalid hash provided")
+	ErrorInvalidHash = fmt.Errorf("argon2id: invalid hash provided")
 
 	// ErrorInvalidVersion indicates that the provided has may be an argon hash
 	// but is not an argon2id hash.
-	ErrorInvalidVersion = fmt.Errorf("non argon2id hash provided")
+	ErrorInvalidVersion = fmt.Errorf("argon2id: non argon2id hash provided")
 
 	// ErrorPasswordMismatch indicates that the provided hash and password do
 	// not match.
-	ErrorPasswordMismatch = fmt.Errorf("argon: password did not match")
+	ErrorPasswordMismatch = fmt.Errorf("argon2id: password did not match")
 )
 
 // Parameters is a collection of parameters that control the output of the
